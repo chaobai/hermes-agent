@@ -15,6 +15,8 @@ import textwrap
 from dataclasses import dataclass
 from pathlib import Path
 
+from hermes_cli.profiles import get_active_profile_name
+
 PROJECT_ROOT = Path(__file__).parent.parent.resolve()
 
 from gateway.status import terminate_pid
@@ -3723,7 +3725,7 @@ def run_gateway(verbose: int = 0, quiet: bool = False, replace: bool = False):
     print("│  Messaging platforms + cron scheduler                    │")
     print("│  Press Ctrl+C to stop                                   │")
     print("└─────────────────────────────────────────────────────────┘")
-    print()
+    print("Profile:", get_active_profile_name())
 
     # Exit with code 1 if gateway fails to connect any platform,
     # so systemd Restart=always will retry on transient errors

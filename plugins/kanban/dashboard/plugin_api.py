@@ -50,6 +50,7 @@ from pydantic import BaseModel, Field
 
 from hermes_cli import kanban_db
 from hermes_cli import kanban_diagnostics as kd
+from hermes_cli import profiles as profiles
 
 log = logging.getLogger(__name__)
 
@@ -490,11 +491,7 @@ def get_board(
         ]
         # List of distinct assignees for the lane-by-profile sub-grouping.
         assignees = [
-            r["assignee"]
-            for r in conn.execute(
-                "SELECT DISTINCT assignee FROM tasks WHERE assignee IS NOT NULL "
-                "AND status != 'archived' ORDER BY assignee"
-            )
+            p.name for p in profiles.list_profiles() if not getattr(p, "is_default", False)
         ]
 
         return {

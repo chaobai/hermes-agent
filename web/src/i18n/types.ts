@@ -768,6 +768,7 @@ export interface Translations {
       ready: string;
       running: string;
       blocked: string;
+      review: string;
       done: string;
       archived: string;
     };
@@ -778,6 +779,7 @@ export interface Translations {
       ready: string;
       running: string;
       blocked: string;
+      review: string;
       done: string;
       archived: string;
     };
